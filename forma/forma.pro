@@ -29,3 +29,6 @@ SOURCES += \
 
 HEADERS += \
         widget.h
+
+RESOURCES += \
+    resource.qrc
