@@ -1,0 +1,44 @@
+#include "widget.h"
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+{
+
+    s = new QSpinBox;
+    d = new QDial;
+    lcd =  new QLCDNumber;
+    button = new QPushButton("calculate");
+    label = new QLabel;
+    l = new QVBoxLayout;
+    l->addWidget(s);
+    l->addWidget(d);
+    l->addWidget(lcd);
+    l->addWidget(button);
+    l->addWidget(label);
+
+
+
+    this->setLayout(l);
+    this->resize(300,500);
+
+   connect(button, SIGNAL(clicked(bool)), this, SLOT(calc()));
+   connect(d, SIGNAL(valueChanged(int)), this, SLOT(showDialValue()));
+
+}
+
+Widget::~Widget()
+{
+
+}
+void  Widget::calc()
+{   int x= s->value();
+    int y= d->value();
+
+    lcd->display(x+y);
+}
+
+void  Widget::showDialValue(){
+    int z=d->value();
+    QString str = QString::number(z);
+    label->setText("dial valuse is"+str);
+}
